@@ -1,0 +1,191 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_title %}
+Base de Perguntas
+{% endblock page_title %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-2">
+    <h1>Base de Perguntas</h1>
+    <div class="d-flex justify-content-end">
+        <a href="{% url 'todo_create' %}" class="btn btn-success theme-button">  +  Cadastrar</a>
+    </div>
+</div>
+
+<form method="GET" class="mb-2">
+    <div class="input-group mb-2">
+        <input type="text" name="search" class="form-control me-1" placeholder="Buscar Pergunta" value="{{ search }}">
+        <button class="btn btn-primary me-2 theme-button rounded" type="submit">Buscar</button>
+        <a href="{% url 'todo_list' %}" class="btn btn-secondary theme-button rounded">Limpar</a>
+    </div>
+    <div class="form-group mb-2 position-relative float-right">
+        <select id="filter-client" class="form-control" name="cliente" onchange="this.form.submit()">
+            <option value="">Todos</i> </option>
+            
+            {% for cliente in clientes_unicos %}
+                <option value="{{ cliente }}" {% if cliente_selecionado == cliente %}selected{% endif %}>{{ cliente }}</option>
+            {% endfor %}          
+        </select>
+        <i class="fa fa-filter position-absolute" style="top: 10px; right: 10px; color: #007bff;"></i> 
+    </div>    
+</form>
+
+<div class="table-responsive flex-grow-1" style="min-height: 0; max-height: calc(95vh - 200px); overflow-y: auto;">
+    <table class="table table-hover table-bordered table-sm theme-table" id="tabela-perguntas">
+        <thead class="theme-thead">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Pergunta</th>
+                <th scope="col">Resposta</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for todo in todo_list %}
+            <tr>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td class="todo-pergunta font-weight-bold">{{ todo.pergunta }}</td>
+                <td class="todo-resposta">
+                    <div class="resposta-container">{{ todo.resposta }}</div>
+                </td>
+                <td class="text-center todo-cliente">{{ todo.cliente }}</td>
+                <td>
+                    <div class="d-flex">
+                        {% if todo.pk %}
+                            <button class="btn btn-primary btn-sm theme-button me-2" onclick="window.location.href='{% url 'todo_update' pk=todo.pk %}'">Editar</button>
+                            <button class="btn btn-danger btn-sm theme-button" data-url="{% url 'todo_delete' pk=todo.pk %}" data-bs-toggle="modal" data-bs-target="#deleteModal">Excluir</button>
+                        {% else %}
+                            <span>Erro: ID não disponível</span>
+                        {% endif %}
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>   
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const search = '{{ search }}'; // Termo de busca enviado pelo usuário
+
+        if (search) {
+            function highlight(element, searchTerm) {
+                // Escapa caracteres especiais na busca
+                const escapedSearchTerm = searchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                const regex = new RegExp(`(${escapedSearchTerm})`, 'gi');
+
+                // Substitui o termo no texto original com o termo destacado
+                element.innerHTML = element.textContent.replace(regex, '<span class="highlight">$1</span>');
+            }
+
+            // Aplica o destaque nas perguntas e respostas
+            document.querySelectorAll('.todo-pergunta, .todo-resposta').forEach(element => {
+                highlight(element, search);
+            });
+        }
+    });
+</script>
+
+<script>
+    const themeSwitch = document.getElementById('themeSwitch');
+
+    if (localStorage.getItem('theme') === 'dark') {
+        document.body.classList.add('dark-theme');
+        themeSwitch.checked = true; // Marca o switch se o tema escuro estiver ativado
+    }
+
+    themeSwitch.addEventListener('change', function() {
+        if (this.checked) {
+            document.body.classList.add('dark-theme');
+            localStorage.setItem('theme', 'dark'); // Armazena o tema no localStorage
+        } else {
+            document.body.classList.remove('dark-theme');
+            localStorage.setItem('theme', 'light'); // Armazena o tema no localStorage
+        }
+        updateTheme();
+    });
+
+    function updateTheme() {
+        const buttons = document.querySelectorAll('.theme-button');
+        const table = document.querySelector('.theme-table');
+    
+        if (document.body.classList.contains('dark-theme')) {
+            buttons.forEach(button => {
+                // Verifica a cor do botão e aplica o estilo outline correspondente
+                if (button.classList.contains('btn-primary')) {
+                    button.classList.remove('btn-primary');
+                    button.classList.add('btn-outline-primary');
+                } else if (button.classList.contains('btn-secondary')) {
+                    button.classList.remove('btn-secondary');
+                    button.classList.add('btn-outline-secondary');
+                } else if (button.classList.contains('btn-success')) {
+                    button.classList.remove('btn-success');
+                    button.classList.add('btn-outline-success');
+                } else if (button.classList.contains('btn-danger')) {
+                    button.classList.remove('btn-danger');
+                    button.classList.add('btn-outline-danger');
+                }
+            });
+            table.classList.add('table-dark'); // Aplica o estilo escuro para a tabela
+        } else {
+            buttons.forEach(button => {
+                // Reverte o estilo outline para o sólido no tema claro
+                if (button.classList.contains('btn-outline-primary')) {
+                    button.classList.remove('btn-outline-primary');
+                    button.classList.add('btn-primary');
+                } else if (button.classList.contains('btn-outline-secondary')) {
+                    button.classList.remove('btn-outline-secondary');
+                    button.classList.add('btn-secondary');
+                } else if (button.classList.contains('btn-outline-success')) {
+                    button.classList.remove('btn-outline-success');
+                    button.classList.add('btn-success');
+                } else if (button.classList.contains('btn-outline-danger')) {
+                    button.classList.remove('btn-outline-danger');
+                    button.classList.add('btn-danger');
+                }
+            });
+            table.classList.remove('table-dark');
+        }
+        function updateTheme() {
+            // Código existente...
+            const modal = document.querySelector('.modal-content');
+            if (document.body.classList.contains('dark-theme')) {
+                modal.classList.add('bg-dark', 'text-light');
+            } else {
+                modal.classList.remove('bg-dark', 'text-light');
+            }
+        }
+        const modal = document.querySelector('.modal-content');
+        if (document.body.classList.contains('dark-theme')) {
+            modal.classList.add('bg-dark', 'text-light');
+        } else {
+            modal.classList.remove('bg-dark', 'text-light');
+        }        
+    }
+    updateTheme();
+</script>
+<script>
+function filterTable() {
+    const select = document.getElementById("filter-client");
+    const filter = select.value.toLowerCase();
+    const table = document.getElementById("tabela-perguntas");
+    const rows = table.getElementsByTagName("tr");
+
+    for (let i = 1; i < rows.length; i++) { // Começa em 1 para ignorar o cabeçalho
+        const cells = rows[i].getElementsByTagName("td");
+        const clienteCell = cells[2]; // Ajuste o índice com base na posição da coluna Cliente
+
+        if (clienteCell) {
+            const txtValue = clienteCell.textContent || clienteCell.innerText;
+            if (filter === "" || txtValue.toLowerCase() === filter) {
+                rows[i].style.display = ""; // Mostra a linha
+            } else {
+                rows[i].style.display = "none"; // Esconde a linha
+            }
+        }
+    }
+}
+</script>
+{% endblock content %}

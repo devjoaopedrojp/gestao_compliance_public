@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  db:
+    image: mariadb:latest  # Usar a imagem do MariaDB
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}  # Usar variável de ambiente para a senha
+      MYSQL_DATABASE: ${MYSQL_DATABASE}  # Nome do banco de dados
+      MYSQL_USER: ${MYSQL_USER}  # Usuário do banco de dados
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}  # Senha do usuário do banco de dados
+    volumes:
+      - mariadb_data:/var/lib/mysql  # Volume para persistir os dados do MariaDB
+
+  compliance-app:
+    build: .  # Usar o Dockerfile para a aplicação
+    volumes:
+      - .:/todos  # Mapear o diretório local para o diretório dentro do container
+    ports:
+      - "8000:8000"  # Mapear a porta 8000 do container para a porta 8000 local
+    depends_on:
+      - db  # Garantir que o MariaDB seja iniciado antes da aplicação
+    environment:
+      DB_NAME: ${DB_NAME}  # Nome do banco de dados
+      DB_USER: ${DB_USER}  # Usuário do banco de dados
+      DB_PASSWORD: ${DB_PASSWORD}  # Senha do banco de dados
+      DB_HOST: db  # Nome do serviço MariaDB no Docker Compose
+      DB_PORT: 3306  # Porta do MariaDB
+
+volumes:
+  mariadb_data:  # Volume para persistir os dados do MariaDB

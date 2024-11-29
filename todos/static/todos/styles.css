@@ -1,0 +1,253 @@
+/* Estilo de destaque para o texto */
+.highlight {
+    background-color: rgba(255, 255, 0, 0.3); /* Cor de fundo com transparência para o destaque */
+    font-weight: bold;
+    }
+    
+    /* Estilo para a tabela */
+    table {
+    width: 100%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Sombra suave para a tabela */
+    border-radius: 12px; /* Bordas arredondadas mais suaves */
+    overflow: hidden;
+    border-collapse: collapse;
+    background-color: rgba(255, 255, 255, 0.9); /* Fundo com leve transparência */
+    }
+    
+    /* Estilo para cabeçalho da tabela */
+    .table thead th {
+    text-align: center;
+    background: rgba(40, 182, 70, 0.8); /* Gradiente com transparência para o modo claro */
+    color: white;
+    padding: 10px;
+    }
+    
+    /* Estilo para células de dados da tabela */
+    .table tbody td {
+    vertical-align: middle;
+    padding: 10px;
+    }
+    
+    /* Centraliza o conteúdo das células de índice */
+    .table tbody tr td:first-child,
+    .table tbody tr th:first-child {
+    text-align: center;
+    vertical-align: middle;
+    }
+    
+    /* Estilo para linhas alternadas da tabela */
+    .table tbody tr:nth-child(even) {
+    background-color: rgba(230, 247, 255, 0.8); /* Cor clara para linhas pares com transparência */
+    }
+    
+    .table tbody tr:nth-child(odd) {
+    background-color: rgba(255, 255, 255, 0.9); /* Cor branca com leve transparência */
+    }
+    
+    /* Estilo para a coluna de respostas */
+    .resposta-container {
+    background-color: rgba(241, 241, 241, 0.8); /* Cor de fundo leve com transparência */
+    border: 1px solid rgba(221, 221, 221, 0.5); /* Borda suave e leve */
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #272626;
+    }
+    
+    /* Efeito de transição ao passar o mouse sobre a caixa de resposta */
+    .resposta-container:hover {
+    background-color: rgba(232, 232, 232, 0.9); /* Cor mais escura ao passar o mouse */
+    transition: background-color 0.3s;
+    }
+    
+    /* Efeito de transição ao passar o mouse sobre as linhas da tabela */
+    .table-hover tbody tr:hover {
+    background-color: rgba(248, 249, 250, 0.8); /* Cor clara ao passar o mouse com transparência */
+    transition: background-color 0.3s;
+    }
+    
+    /* Estilos para o tema claro */
+    body {
+    background-color: #fbfbfb; /* Cor de fundo clara */
+    color: #333;
+    }
+    
+    /* Estilos para o tema escuro */
+    body.dark-theme {
+    background-color: #262b2b; /* Cor de fundo escura com leve transparência */
+    color: #ffffff;
+    }
+    
+    /* Estilos para a tabela no tema escuro */
+    body.dark-theme .table {
+    background-color: #2525255b; /* Fundo da tabela escura com transparência */
+    }
+    
+    body.dark-theme .table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(51, 51, 51, 0.9); /* Cor das linhas ímpares da tabela escura */
+    }
+    
+    body.dark-theme .table-striped tbody tr:nth-of-type(even) {
+    background-color: rgba(68, 68, 68, 0.9); /* Cor das linhas pares da tabela escura */
+    }
+    
+    /* Estilos para as respostas no tema escuro */
+    body.dark-theme .resposta-container {
+    background-color: rgba(51, 51, 51, 0.9); /* Cor de fundo escura com transparência */
+    color: #ffffff;
+    border: 1px solid rgba(68, 68, 68, 0.5); /* Borda suave no tema escuro */
+    }
+    
+    /* Efeito de transição para os botões ao passar o mouse */
+    .btn:hover {
+    opacity: 0.9; /* Leve redução de opacidade ao passar o mouse */
+    }
+    
+    /* Estilo do texto no cabeçalho */
+    .navbar-brand {
+    color: white; /* Cor do texto no cabeçalho */
+    }
+    
+    body.dark-theme .navbar-brand {
+    color: #ffffff; /* Cor do texto no tema escuro */
+    }
+    
+    /* Efeito de hover no cabeçalho */
+    .navbar-brand:hover {
+    color: rgba(255, 255, 255, 0.8); /* Cor mais suave ao passar o mouse */
+    }
+    
+    .my-navbar{
+    display: flex; /* Garante que os itens sejam exibidos em linha */
+    justify-content: center; /* Centraliza os itens */
+    }
+    
+    /* styles.css */
+    .alert {
+    transition: opacity 0.5s ease-in-out;
+    }
+    
+    /* Fixação do cabeçalho da tabela */
+    .theme-thead th {
+    position: sticky;
+    top: 0; /* Mantém o cabeçalho no topo do contêiner */
+    background-color: #ffffff; /* Fundo do cabeçalho */
+    z-index: 10; /* Garante que o cabeçalho fique acima das linhas da tabela */
+    }
+
+    .my-footer {
+        background: rgba(40, 182, 70, 0.8); /* Gradiente com transparência para o modo claro */
+        background: linear-gradient(135deg, rgba(40, 182, 70, 0.8), rgba(30, 127, 54, 0.8)); /* Modo claro */
+        padding: 1px 0; /* Ajuste o espaçamento interno conforme necessário */
+        text-align: center; /* Centraliza horizontalmente */
+        color: white; /* Adicionando cor branca para o texto */
+        font-weight: bold;
+        height: 45px; /* Defina uma altura para o footer */
+        line-height: 42px; /* Igual à altura para centralizar verticalmente */
+    }    
+
+    .my-navbar {
+        background: rgba(40, 182, 70, 0.8); /* Gradiente com transparência para o modo claro */
+        background: linear-gradient(135deg, rgba(40, 182, 70, 0.8), rgba(30, 127, 54, 0.8)); /* Modo claro */
+        box-shadow: 0 7px 10px rgba(0, 0, 0, 0.2); /* Adiciona sombra sutil */
+        backdrop-filter: blur(10px); /* Efeito de desfoque ao fundo */
+    }
+    
+    .my-navbar .nav-link {
+        color: #ffffff; /* Cor branca */
+        transition: color 0.3s; /* Transição suave ao passar o mouse */
+    }
+    
+    .my-navbar .nav-link:hover {
+        color: rgba(255, 255, 255, 0.8); /* Cor mais clara ao passar o mouse */
+    }
+    
+    .my-navbar .btn-outline-light {
+        border-color: white; /* Borda branca */
+        color: white; /* Cor do texto branca */
+    }
+    
+    .my-navbar .btn-outline-light:hover {
+        background-color: rgba(255, 255, 255, 0.1); /* Leve fundo ao passar o mouse */
+    }
+
+    /* Estilo para campos de entrada no modo escuro */
+    body.dark-theme .input-group .form-control {
+        background-color: rgba(51, 51, 51, 0.9); /* Fundo escuro */
+        color: #ffffff; /* Cor do texto */
+        border: 1px solid white; /* Borda branca */
+    }
+
+    /* Estilo para o texto do placeholder no modo escuro */
+    body.dark-theme .input-group .form-control::placeholder {
+        color: white; /* Cor do texto do placeholder */
+        opacity: 0.8; /* Opacidade para melhor legibilidade */
+    }
+      /* Estilo para campos de entrada no modo escuro */
+      body.dark-theme .form-group .form-control {
+        background-color: rgba(51, 51, 51, 0.9); /* Fundo escuro */
+        color: #ffffff; /* Cor do texto */
+        border: 1px solid white; /* Borda branca */
+    }
+
+    /* Estilo para o texto do placeholder no modo escuro */
+    body.dark-theme .form-group .form-control::placeholder {
+        color: white; /* Cor do texto do placeholder */
+        opacity: 0.8; /* Opacidade para melhor legibilidade */
+    }
+
+    body {
+        transition: background-color 0.3s, color 0.3s; /* Suaviza a transição de cor */
+    }
+    .custom-fluid-container {
+        max-width: 1200px; /* Tamanho base desejado */
+        width: 100%; /* Ocupar toda a largura disponível */
+        margin: 0 auto; /* Centraliza o container */
+    }
+    
+    .position-relative {
+        margin-top: 10px; /* Ajuste conforme necessário */
+    }
+    
+    .position-absolute {
+        pointer-events: none; /* Permitir cliques no dropdown */
+    }
+    
+    .fa-filter {
+        font-size: 1.2em; /* Tamanho do ícone */
+    }
+    .position-relative {
+        display: inline-block; /* Permite posicionar o ícone relativo ao select */
+    }
+    
+    .form-control {
+        padding-right: 30px; /* Adiciona espaço à direita para o ícone */
+    }
+    
+    .fa-filter {
+        font-size: 1em; /* Tamanho do ícone */
+        pointer-events: none; /* Permite cliques no dropdown */
+        position: absolute; /* Para posicionar em relação ao select */
+        top: 50%; /* Centraliza verticalmente em relação ao select */
+        right: 10px; /* Posição horizontal do ícone */
+        transform: translateY(-6%); /* Ajusta a posição vertical */
+        color: #007bff; /* Cor do ícone */
+    }
+    /* Estilos específicos para a página de login */
+    body.login-page {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #fbfbfb; /* Ou qualquer cor que desejar */
+    }
+
+    body.login-page .form-container {
+        max-width: 400px;
+        width: 100%;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 8px;
+    }

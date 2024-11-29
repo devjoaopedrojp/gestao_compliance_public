@@ -1,0 +1,48 @@
+# Python
+*.pyc
+*.pyo
+__pycache__/
+*.log
+
+# Django
+*.sqlite3
+/media/
+db.sqlite3
+
+# Docker
+mariadb_data/
+*.env
+.env.*
+*.dockerignore
+
+# Virtual environments
+.env/
+venv/
+.virtualenv/
+pip-log.txt
+pip-delete-this-directory.txt
+# Permitir .env.example
+!.env.example
+
+# Byte-compiled and cached
+*.py[cod]
+*$py.class
+
+# System files
+.DS_Store
+Thumbs.db
+
+# IDEs/Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Arquivos temporários
+*.bak
+*.backup
+*.tmp
+*.log
+*.out
+*.pid
+

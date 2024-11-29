@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block page_title %}
+  {% if todo.pk %}
+    Editar Pergunta  
+  {% else %}
+    Registrar Pergunta
+  {% endif %}
+{% endblock page_title %}
+
+{% block content %}
+    {% if todo.pk %}
+      <h1>Editar Pergunta</h1>  
+    {% else %}
+      <h1>Nova Pergunta</h1>
+    {% endif %}
+    
+    <form method='POST'>
+        {% csrf_token %}        
+        {{ form|crispy }}
+
+        <div class="d-flex mt-3">
+          <button type='submit' class='btn btn-primary me-2 theme-button'>Salvar</button>
+          <a href="{% url 'todo_list' %}" class="btn btn-secondary theme-button">Voltar</a>
+        </div>
+    </form>
+
+    <script>
+        const themeSwitch = document.getElementById('themeSwitch');
+
+        // Verifica o tema armazenado e aplica
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-theme');
+            themeSwitch.checked = true;
+        }
+
+        themeSwitch.addEventListener('change', function() {
+            if (this.checked) {
+                document.body.classList.add('dark-theme');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.body.classList.remove('dark-theme');
+                localStorage.setItem('theme', 'light');
+            }
+            updateTheme();
+        });
+
+        updateTheme(); // Chamada para aplicar o tema
+    </script>
+{% endblock content %}
