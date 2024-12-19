@@ -72,7 +72,7 @@ Certifique-se de ter as seguintes ferramentas instaladas no seu ambiente:
 Clone o repositório do projeto no seu ambiente local:
 
 ```bash
-git clone https://github.com/devjoaopedrojp/gestao_compliance.git  
+git clone git@github.com:devjoaopedrojp/gestao_compliance_public.git
 ```
 
 <h3>Executando o projeto</h3>
