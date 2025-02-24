@@ -10,6 +10,9 @@ Base de Perguntas
     <h1>Base de Perguntas</h1>
     <div class="d-flex justify-content-end">
         <a href="{% url 'todo_create' %}" class="btn btn-success theme-button">  +  Cadastrar</a>
+        <button class="btn btn-info ms-2 theme-button" data-bs-toggle="modal" data-bs-target="#uploadModal">
+            <i class="fa-solid fa-file-arrow-up"></i> Upload
+        </button> 
     </div>
 </div>
 
@@ -66,6 +69,36 @@ Base de Perguntas
         </tbody>
     </table>   
 </div>
+
+<!-- Modal de Upload -->
+<div class="modal fade modal-lg" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="uploadModalLabel">Upload de Arquivo Excel</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="POST" enctype="multipart/form-data" action="{% url 'todo_upload_excel' %}">
+                {% csrf_token %}
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="excelFile" class="form-label">Selecione o arquivo Excel (.xlsx)</label>
+                        <input class="form-control" type="file" id="excelFile" name="excel_file" accept=".xlsx, .xls">
+                    </div>
+                    <div class="text-center mt-3">
+                        <p class="mb-2">Exemplo de arquivo, matenha a linha 1 conforme imagem abaixo::</p>
+                        <img src="{% static 'todos/example_xlsx.png' %}" alt="Imagem de exemplo" class="img-fluid" style="max-width: 400px;">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const search = '{{ search }}'; // Termo de busca enviado pelo usuário
